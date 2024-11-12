@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.modelrepositorydemo.dao.ReleaseMapper">
+    <resultMap id="release" type="com.example.modelrepositorydemo.Entity.Release">
+        <id property="releaseId" column="release_id"/>
+        <result property="releaseNo" column="release_no"/>
+        <result property="versionId" column="version_id"/>
+        <result property="artifactId" column="artifact_id"/>
+        <result property="modelUUID" column="model_uuid"/>
+        <result property="rollback" column="rollback"/>
+        <result property="creator" column="creator"/>
+        <result property="gmtCreat" column="gmt_create"/>
+        <result property="gmtModifie" column="gmt_modified"/>
+    </resultMap>
+    <select id="getAllRelease" resultMap="release">
+        select *
+        from model_repo.release
+    </select>
+    <select id="findByArtifactIdAndReleaseNo" resultMap="release">
+        select *
+        from model_repo.release
+        where artifact_id = #{artifactId}
+          and release_no = #{releaseNo}
+    </select>
+    <update id="updateRollBack">
+        update model_repo.release
+        set rollback = #{rollback}
+        where release_id = #{releaseId}
+    </update>
+</mapper>

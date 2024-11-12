@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.modelrepositorydemo.dao.LogMapper">
+    <resultMap id="log" type="com.example.modelrepositorydemo.Entity.Log">
+        <id property="logId" column="log_id"/>
+        <result property="creator" column="creator"/>
+        <result property="operation" column="operation"/>
+        <result property="releaseId" column="release_id"/>
+        <result property="releaseNo" column="release_no"/>
+        <result property="versionId" column="version_id"/>
+        <result property="artifactId" column="artifact_id"/>
+        <result property="modelUUID" column="model_uuid"/>
+        <result property="gmtCreat" column="gmt_create"/>
+    </resultMap>
+
+    <insert id="save">
+        insert into model_repo.log
+        (creator, operation, release_id, release_no, version_id, artifact_id, model_uuid, gmt_create)
+        values (#{log.creator}, #{log.operation}, #{log.releaseId}, #{log.releaseNo}, #{log.versionId},
+                #{log.artifactId}, #{log.modelUUID}, now())
+    </insert>
+
+</mapper>
